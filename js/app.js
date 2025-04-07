@@ -23,33 +23,33 @@ function adicionar() {
 
     let indexCarrinho = carrinho.findIndex(item => item.name === nomeProduto);
 
-    if(indexCarrinho === -1) {
+    let totalPrecoProduto;
 
+    if(indexCarrinho === -1) {
         carrinho.push({
             name: nomeProduto,
             price: precoProduto,
             unit: quantidade,
         });
-
+        totalPrecoProduto = precoProduto * quantidade;
         precoTotal += precoProduto * quantidade;
 
     } else {
         precoTotal += precoProduto * quantidade;
         carrinho[indexCarrinho].unit += quantidade;
+        totalPrecoProduto = precoProduto * carrinho[indexCarrinho].unit;
     }
 
     let lista = document.getElementById('lista-produtos');
     let selectList = lista.querySelector('.carrinho__produtos__produto');
 
     selectList.innerHTML = '';
-
     selectList.innerHTML = carrinho.map(item => 
-        `<div><span class="texto-azul">${item.unit}x</span> ${item.name} <span class="texto-azul">R$${item.price}</span></div>`
+        `<div><span class="texto-azul">${item.unit}x</span> ${item.name} <span class="texto-azul">R$${totalPrecoProduto}</span></div>`
     ).join('');
 
     let total = document.getElementById('valor-total');
-
-    total.innerHTML = `R$${precoTotal}`;
+    total.textContent = `R$${precoTotal}`;
 
 }
 
@@ -62,7 +62,7 @@ function limpar() {
     let selectList = lista.querySelector('.carrinho__produtos__produto');
     let total = document.getElementById('valor-total');
 
-    total.innerHTML = 'R$0';
+    total.textContent = 'R$0';
     selectList.innerHTML = '';
     document.getElementById('quantidade').value = '';
 
