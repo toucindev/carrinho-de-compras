@@ -60,9 +60,8 @@ function limpar() {
 
     let lista = document.getElementById('lista-produtos');
     let selectList = lista.querySelector('.carrinho__produtos__produto');
-    let total = document.getElementById('valor-total');
-
-    total.textContent = 'R$0';
+    document.getElementById('valor-total').textContent = 'R$0';
+    
     selectList.innerHTML = '';
     document.getElementById('quantidade').value = '';
 
